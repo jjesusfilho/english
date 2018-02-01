@@ -43,7 +43,7 @@ portuguese.default <- function (x, ...)
 
 #' @describeIn as.portuguese Convert an portuguese object back to class numeric
 #' @export
-portuguese.numeric <- portuguese.portuguese <- function (x, BR, ...) {
+portuguese.numeric <- portuguese.portuguese <- function (x, BR=TRUE, ...) {
   if (missing(BR)) {
     BR <- !grepl("^(pt_br|portuguese_brazil)",
                  tolower(Sys.getlocale("LC_CTYPE")))
@@ -219,7 +219,7 @@ as.character.portuguese <- local({
           as.vector(teens[digits[1]])
       else
         trim(paste(tens[digits[2]],
-                   and(digits[2:1]),
+                   and(digits[1]),
                    helper(as.numeric(digits[1]))))
       else if (nDigits == 3)
         trim(paste(hundreds[digits[3]],

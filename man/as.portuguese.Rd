@@ -16,7 +16,7 @@ as.portuguese(x, ...)
 
 \method{portuguese}{default}(x, ...)
 
-\method{portuguese}{numeric}(x, BR, ...)
+\method{portuguese}{numeric}(x, BR = TRUE, ...)
 
 \method{as.numeric}{portuguese}(x, ...)
 
