@@ -1,20 +1,11 @@
 #' @name as.portuguese
-
-
+#' @title Generic functions and methods for S3 class english
+#'
 #' @description The functions \code{as.portuguese} and \code{portuguese} are fully
 #'    equivalent generic constructor functions for the S3 class
 #'    \code{portuguese}, which allows numeric objects to be represented in
 #'    the form of their customary Portuguese expression.
 #'
-#' @usage 
-#' as.portuguese(x, ...)
-#' portuguese(x, ...)
-#' @method{portuguese}{default}(x, \dots)
-#' @method{portuguese}{numeric}(x, BR, \dots)
-#' @method{portuguese}{portuguese}(x, BR, \dots)
-#' @method{[}{portuguese}(x, i)
-#' @method{rep}{portuguese}(x, \dots)
-#' @method{format}{portuguese}(x, \dots)
 #'
 #' @param x Any numeric object.  If the components are not integers, they are
 #'    rounded.  In the case of \code{portuguese.default} this may be an
@@ -37,26 +28,21 @@
 #'     as a coercion and to have no effect on objects already of the class.
 #' @return  An object of class \code{portuguese}, if possible, or an error message if
 #'     not.
-#' @examples
-#' portuguese(1010, BR = FALSE)
-#' portuguese(1010, BR = TRUE)
-#' #The default BR setting will depend on the locale
-#' cat("\n", ifelse(grepl("^(pt_pt|portuguese_portugal)",
-#'                      tolower(Sys.getlocale("LC_CTYPE"))), "PT", "BR"),
-#'   "Portuguese is your default\n")
-#' portuguese(101)       ## BR not given: deduced from locale
-#' as.portuguese(10001001) + (-5):5
+#'
 #' @export
-as.portuguese <- portuguese <- function (x, ...) {
+as.portuguese <- portuguese<-function (x, ...) {
   UseMethod("portuguese")
 }
+
 
 #' @describeIn as.portuguese Generic functions and methods for S3 class english
 portuguese.default <- function (x, ...)
   stop("no method defined for objects of class ",
        paste(dQuote(class(x)), collapse = ", "))
 
+
 #' @describeIn as.portuguese Convert an portuguese object back to class numeric
+#' @export
 portuguese.numeric <- portuguese.portuguese <- function (x, BR, ...) {
   if (missing(BR)) {
     BR <- !grepl("^(pt_br|portuguese_brazil)",
@@ -79,9 +65,6 @@ portuguese.numeric <- portuguese.portuguese <- function (x, BR, ...) {
 #' @return A numeric vector of class \code{portuguese}.
 #' @export
 #'
-#' @examples
-#' portuguese(1:10)^2 + 1
-#'
 Ops.portuguese <- function (e1, e2) {
   e1 <- unclass(e1)
   if (!missing(e2))
@@ -100,9 +83,6 @@ Ops.portuguese <- function (e1, e2) {
 #' @return A numeric vector of class \code{portuguese}.
 #' @export
 #'
-#' @examples
-#' (x <- portuguese(1:10))
-#' as.numeric(x)
 as.numeric.portuguese <- function(x, ...) {
   x <- unclass(x)
   attr(x, "useBR") <- NULL
@@ -117,7 +97,6 @@ as.numeric.portuguese <- function(x, ...) {
 #' @export
 #'
 #' @examples
-#' print(portuguese(1:10))
 print.portuguese <- function (x, ...) {
   print(noquote(as.character.portuguese(x)))
   invisible(x)
@@ -134,13 +113,6 @@ print.portuguese <- function (x, ...) {
 #'     sorted order.
 #' @export
 #'
-#' @examples
-#' set.seed(1010)
-#' x <- portuguese(sample(1:100, 5))
-#' noquote(matrix(as.character(x)))
-#' noquote(matrix(as.character(sort(x))))
-
-
 sort.portuguese <- function (x, decreasing = FALSE, ...) {
   structure(NextMethod("sort"), class = "portuguese", usePT = attr(x, "useBR"))
 }
@@ -292,11 +264,11 @@ as.character.portuguese <- local({
   }
 })
 
-#' @describeIn as.portuguese   Generic functions and methods for S3 class english
+#' @describeIn as.portuguese  class portuguese
 rep.portuguese <- function (x, ...)
   structure(rep(unclass(x), ...), class = class(x))
 
-#' @describeIn as.portuguese Generic functions and methods for S3 class english
+#' @describeIn as.portuguese Old method
 `[.portuguese` <- function(x, i) {
   cl <- oldClass(x)
   y <- NextMethod("[")
@@ -304,7 +276,7 @@ rep.portuguese <- function (x, ...)
   y
 }
 
-#' @describeIn as.portuguese Generic functions and methods for S3 class english
+#' @describeIn as.portuguese Format for portuguese
 format.portuguese <- function(x, ...) {
   format(as.character.portuguese(x), ...)
 }

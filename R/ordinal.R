@@ -6,20 +6,14 @@
 #'   the same way as the function \code{as.character.portuguese} but
 #'   produces an ordinal, rather than a cardinal number version
 #' 
-#' @usage
-#' ordinal(x, ...)
-#' @method{ordinal}{numeric}(x, ...)
-#' @method{ordinal}{portuguese}(x, ...)
-#' @method{ordinal}{character}(x, ...)
 #' 
 #' @param x  An object to produce portuguese ordinal output.
 #' @param ... Additional arguments passed on to \code{portuguese} for the initial
 #'     conversion.
-#' @details{
-#'   The object is first converted to a character string an \code{portuguese}
-#'   object, if necessary, then to character and finally adjusted so that
-#'   it provides the ordinal version of the portuguese representation.
-#' }
+#' @details The object is first converted to a character string an \code{portuguese}
+#'     object, if necessary, then to character and finally adjusted so that
+#'    it provides the ordinal version of the portuguese representation.
+#' 
 #' @return A character string vector of ordinal numbers in portuguese.
 #' @examples
 #'   ## for Brazil style portuguese:
@@ -31,10 +25,13 @@
 #'   ## For mothers of small children:
 #'   cat(paste("Esta é a", ordinal(1:5), "vez que eu lhe falo!"), sep = "\n")
 #' 
-#' 
-ordinal <- function(x, ...)
+#' @export
+ordinal <- function(x, ...) {
   UseMethod("ordinal")
+}
 
+#' @export
+#' @describeIn ordinal convert ordinal to text
 ordinal.portuguese <- local({
   Cards <-
     c("um",
@@ -75,7 +72,11 @@ ordinal.portuguese <- local({
   }
 })
 
+#' @export
+#' @describeIn ordinal convert ordinal to text
 ordinal.numeric <- function(x, ...)
   ordinal.portuguese(portuguese(x, ...))
 
+#' @export
+#' @describeIn ordinal convert ordinal to text
 ordinal.character <- ordinal.portuguese

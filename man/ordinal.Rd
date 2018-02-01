@@ -2,10 +2,19 @@
 % Please edit documentation in R/ordinal.R
 \name{ordinal}
 \alias{ordinal}
+\alias{ordinal.portuguese}
+\alias{ordinal.numeric}
+\alias{ordinal.character}
 \title{Generic functions and methods generating portuguese versions of
     ordinal whole numbers as character strings}
 \usage{
 ordinal(x, ...)
+
+\method{ordinal}{portuguese}(x, ...)
+
+\method{ordinal}{numeric}(x, ...)
+
+\method{ordinal}{character}(x, ...)
 }
 \arguments{
 \item{x}{An object to produce portuguese ordinal output.}
@@ -22,12 +31,19 @@ The function \code{ordinal} is generic and works in much
   produces an ordinal, rather than a cardinal number version
 }
 \details{
-{
-  The object is first converted to a character string an \code{portuguese}
-  object, if necessary, then to character and finally adjusted so that
-  it provides the ordinal version of the portuguese representation.
+The object is first converted to a character string an \code{portuguese}
+    object, if necessary, then to character and finally adjusted so that
+   it provides the ordinal version of the portuguese representation.
 }
-}
+\section{Methods (by class)}{
+\itemize{
+\item \code{portuguese}: convert ordinal to text
+
+\item \code{numeric}: convert ordinal to text
+
+\item \code{character}: convert ordinal to text
+}}
+
 \examples{
   ## for Brazil style portuguese:
   ordinal(c(1, 9, 10, 11, 12, 19, 20, 21, 99, 100, 101, 109, 111,
@@ -37,6 +53,5 @@ The function \code{ordinal} is generic and works in much
             119, 1000, 1100, 1199, 9999, 10000, 10001), UK = FALSE)
   ## For mothers of small children:
   cat(paste("Esta é a", ordinal(1:5), "vez que eu lhe falo!"), sep = "\\n")
-
 
 }

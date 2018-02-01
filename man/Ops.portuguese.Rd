@@ -17,7 +17,3 @@ A numeric vector of class \code{portuguese}.
 \description{
 Allows arithmetic with objects of class \code{portuguese}.
 }
-\examples{
-portuguese(1:10)^2 + 1
-
-}
