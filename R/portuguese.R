@@ -219,6 +219,7 @@ as.character.portuguese <- local({
           as.vector(teens[digits[1]])
       else
         trim(paste(tens[digits[2]],
+                   and(digits[1]),
                    helper(as.numeric(digits[1]))))
       else if (nDigits == 3)
         trim(paste(hundreds[digits[3]],
