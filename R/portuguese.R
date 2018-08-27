@@ -1,5 +1,5 @@
 #' @name as.portuguese
-#' @title Generic functions and methods for S3 class english
+#' @title Generic functions and methods for S3 class portuguese
 #'
 #' @description The functions \code{as.portuguese} and \code{portuguese} are fully
 #'    equivalent generic constructor functions for the S3 class
@@ -35,7 +35,7 @@ as.portuguese <- portuguese<-function (x, ...) {
 }
 
 
-#' @describeIn as.portuguese Generic functions and methods for S3 class english
+#' @describeIn as.portuguese Generic functions and methods for S3 class portuguese
 portuguese.default <- function (x, ...)
   stop("no method defined for objects of class ",
        paste(dQuote(class(x)), collapse = ", "))
